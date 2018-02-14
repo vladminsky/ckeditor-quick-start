@@ -12,6 +12,7 @@
     "@ckeditor/ckeditor5-image": "^1.0.0-alpha.2",
     "@ckeditor/ckeditor5-paragraph": "^1.0.0-alpha.2",
     "@ckeditor/ckeditor5-ui": "^1.0.0-alpha.2",
+    "@ckeditor/ckeditor5-utils": "^1.0.0-alpha.2",
     "css-loader": "^0.28.9",
     "node-sass": "^4.7.2",
     "raw-loader": "^0.5.1",

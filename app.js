@@ -11,6 +11,9 @@ import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import ModelElement from '@ckeditor/ckeditor5-engine/src/model/element';
 import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 
+import ObservableMixin from '@ckeditor/ckeditor5-utils/src/observablemixin';
+import mix from '@ckeditor/ckeditor5-utils/src/mix';
+
 class InsertImage extends Plugin {
     init() {
         console.log('Insert image plugin init');
@@ -56,3 +59,30 @@ ClassicEditor
     .catch(error => {
         console.error(error.stack);
     });
+
+
+// Architecture intro
+// https://docs.ckeditor.com/ckeditor5/latest/framework/guides/architecture/intro.html
+
+class Command {
+    constructor() {
+        this.decorate( 'execute' );
+        this.set( 'value', undefined );
+        this.set( 'isEnabled', undefined );
+    }
+
+    // Will now fire the #execute event automatically.
+    execute() {}
+}
+
+mix( Command, ObservableMixin );
+
+const command = new Command();
+
+command.on('change:value', ( evt, propertyName, newValue, oldValue ) => {
+    console.log(
+        `${ propertyName } has changed from ${ oldValue } to ${ newValue }`
+    );
+});
+
+command.value = true; // -> 'value has changed from undefined to true'
